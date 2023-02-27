@@ -3,12 +3,8 @@ const { NavLink } = require('react-router-dom');
 const Navigation = () => {
   return (
     <nav>
-      <NavLink to="/" exact>
-        Main
-      </NavLink>
-      <NavLink to="/contacts" exact>
-        Contacts
-      </NavLink>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/contacts">Contacts</NavLink>
     </nav>
   );
 };
