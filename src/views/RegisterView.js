@@ -36,10 +36,20 @@ const RegisterView = () => {
           <input type="text" name="name" value={name} onChange={handleChange} />
         </label>
         <label>
+          Email
           <input
             type="email"
             name="email"
             value={email}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            name="password"
+            value={password}
             onChange={handleChange}
           />
         </label>
