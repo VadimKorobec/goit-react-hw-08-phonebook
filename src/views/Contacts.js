@@ -1,3 +1,4 @@
+import { ContactList } from 'components/ContactList/ContactList';
 import { ContactsForm } from 'components/ContactsForm/ContactsForm';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,8 @@ const Contacts = () => {
     <div>
       <h1>Contacts</h1>
       <ContactsForm />
+      <div>{isLoading && 'Request in progress...'}</div>
+      <ContactList />
     </div>
   );
 };
