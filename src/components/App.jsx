@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { AppBar } from './AppBar/AppBar';
 import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
 const Home = lazy(() => import('../pages/Home'));
 const Register = lazy(() => import('../pages/Register'));
@@ -20,10 +21,19 @@ export const App = () => {
     <div>
       <AppBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route exact path="/" element={<Home />} /> */}
+        {/* <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/contacts" element={<Contacts />} /> */}
+        <PublicRoute exact path="/">
+          <Home />
+        </PublicRoute>
+        <PublicRoute exact path="/register" restricted>
+          <Register />
+        </PublicRoute>
+        <PublicRoute exact path="/login" restricted>
+          <Login />
+        </PublicRoute>
         <PrivateRoute patch="/contacts">
           <Contacts />
         </PrivateRoute>
