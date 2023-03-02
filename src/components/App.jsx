@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { AppBar } from './AppBar/AppBar';
 import { PrivateRoute } from './PrivateRoute';
@@ -12,32 +12,37 @@ const Contacts = lazy(() => import('../pages/Tasks'));
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(
+    authSelectors.isFetchingCurrentUser
+  );
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
 
   return (
-    <div>
-      <AppBar />
-      <Routes>
-        {/* <Route exact path="/" element={<Home />} /> */}
-        {/* <Route path="/register" element={<Register />} />
+    !isFetchingCurrentUser && (
+      <div>
+        <AppBar />
+        <Routes>
+          {/* <Route exact path="/" element={<Home />} /> */}
+          {/* <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/contacts" element={<Contacts />} /> */}
-        <PublicRoute exact path="/">
-          <Home />
-        </PublicRoute>
-        <PublicRoute exact path="/register" restricted>
-          <Register />
-        </PublicRoute>
-        <PublicRoute exact path="/login" restricted>
-          <Login />
-        </PublicRoute>
-        <PrivateRoute patch="/contacts">
-          <Contacts />
-        </PrivateRoute>
-      </Routes>
-    </div>
+          {/* <Route path="/contacts" element={<Contacts />} /> */}
+          <PublicRoute exact path="/">
+            <Home />
+          </PublicRoute>
+          <PublicRoute exact path="/register" restricted>
+            <Register />
+          </PublicRoute>
+          <PublicRoute exact path="/login" restricted>
+            <Login />
+          </PublicRoute>
+          <PrivateRoute patch="/contacts">
+            <Contacts />
+          </PrivateRoute>
+        </Routes>
+      </div>
+    )
   );
 };
