@@ -1,6 +1,6 @@
-import LoginForm from 'components/LoginForm/LoginForm';
+import { LoginForm } from 'components/LoginForm/LoginForm';
 
-export const Login = () => {
+const Login = () => {
   return (
     <div>
       <h1>Login</h1>
@@ -8,3 +8,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;
