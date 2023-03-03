@@ -1,33 +1,35 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/operations';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilteredContacts } from '../../redux/contacts/contacts.selectors';
 import { useEffect } from 'react';
-import { ContactListItem } from 'components/ContactListItem/ContactListItem';
+import { fetchContacts } from 'redux/contacts/contacts.operations';
 import {
-  selectFilteredContacts,
-  selectIsLoading,
-  selectError,
-} from 'redux/contacts/selectors';
+  selectErrorContacts,
+  selectIsLoadingContacts,
+} from 'redux/contacts/contacts.selectors';
+import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
   const dispatch = useDispatch();
+  const isLoadingContacts = useSelector(selectIsLoadingContacts);
+  const errorContacts = useSelector(selectErrorContacts);
 
   useEffect(() => {
-    dispatch(fetchContacts);
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
-    <div>
-      {isLoading && !error && <b>Request in progress...</b>}
-      <ul>
-        {contacts.map(contact => (
-          <li key={contact.id}>
-            <ContactListItem contact={contact} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {isLoadingContacts && !errorContacts && <b>Request in progress...</b>}
+      {contacts.length ? (
+        <ul>
+          {contacts.map(contact => (
+            <ContactListItem key={contact.id} contact={contact} />
+          ))}
+        </ul>
+      ) : (
+        <p>Start adding contacts!</p>
+      )}
+    </>
   );
 };
