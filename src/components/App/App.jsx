@@ -1,48 +1,42 @@
 import { useEffect, lazy } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { AppBar } from '../AppBar/AppBar';
-import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
-import { PublicRoute } from '../PublicRoute';
+import { Layout } from 'components/Layout/Layout';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import { RestrictedRoute } from 'components/RestrictedRoute/RestricteRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { useAuth } from 'hooks/useAuth';
 
-const Home = lazy(() => import('../../pages/Home'));
-const Register = lazy(() => import('../../pages/Register'));
-const Login = lazy(() => import('../../pages/Login'));
-const Contacts = lazy(() => import('../pages/Tasks'));
+const HomePage = lazy(() => import('../../pages/Home'));
+const RegisterPage = lazy(() => import('../../pages/Register'));
+const LoginPage = lazy(() => import('../../pages/Login'));
+const ContactsPage = lazy(() => import('../pages/Tasks'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isFetchingCurrentUser = useSelector(
-    authSelectors.isFetchingCurrentUser
-  );
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(authOperations.getCurrentUser());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    !isFetchingCurrentUser && (
-      <div>
-        <AppBar />
-        <Routes>
-          {/* <Route exact path="/" element={<Home />} /> */}
-          {/* <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/contacts" element={<Contacts />} /> */}
-          <PublicRoute exact path="/">
-            <Home />
-          </PublicRoute>
-          <PublicRoute exact path="/register" restricted>
-            <Register />
-          </PublicRoute>
-          <PublicRoute exact path="/login" restricted>
-            <Login />
-          </PublicRoute>
-          <PrivateRoute patch="/contacts">
-            <Contacts />
-          </PrivateRoute>
-        </Routes>
-      </div>
-    )
+  return !isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route>
+        <Route path="/" element={<Layout />} />
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
