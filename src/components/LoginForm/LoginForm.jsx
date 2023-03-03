@@ -4,9 +4,9 @@ import { logIn } from 'redux/auth/operations';
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.currentTarget;
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
     dispatch(
       logIn({
         email: form.elements.email.value,
@@ -17,19 +17,16 @@ export const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h1>LoginView</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input type="email" name="email" />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <label>
+        Email
+        <input type="email" name="email" />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" />
+      </label>
+      <button type="submit">Log In</button>
+    </form>
   );
 };
