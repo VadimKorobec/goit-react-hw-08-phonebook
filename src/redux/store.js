@@ -9,15 +9,15 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { contactsReducer } from './contacts/slice';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { contactsReducer } from './contacts/contacts.slice';
 import { filtersReducer } from './contacts/filter.slise';
-import { authReduser } from './auth/slice';
+import { authReduser } from './auth/auth.slice';
 
 const authPersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token'], // Persisting token field from auth slice to localstorage
 };
 
 export const store = configureStore({
