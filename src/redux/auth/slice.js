@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser } from './auth.operations';
+import { register, logIn, logOut, refreshUser } from './operations';
 
 const successfulActions = [register, logIn];
 const getActionsSuccess = type => successfulActions.map(action => action[type]);
