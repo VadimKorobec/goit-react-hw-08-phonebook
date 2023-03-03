@@ -1,26 +1,24 @@
-import { ContactList } from 'components/ContactList/ContactList';
+import { ContactList } from '../components/ContactList/ContactList';
+import { Helmet } from 'react-helmet';
+import { Filter } from '../components/Filter/Filter';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Container } from 'components/Container/Container.styled';
 import { ContactsForm } from 'components/ContactsForm/ContactsForm';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/operations';
-import { selectIsLoading } from 'redux/contacts/selectors';
 
-const Contacts = () => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
+export default function Contacts() {
   return (
     <div>
-      <h1>Contacts</h1>
-      <ContactsForm />
-      <div>{isLoading && 'Request in progress...'}</div>
-      <ContactList />
+      <Helmet prioritizeSeoTags>
+        <title>My phonebook</title>
+        <meta property="og:title" content="My phonebook" />
+      </Helmet>
+      <Container>
+        <ContactsForm />
+        <Filter />
+        <ContactList />
+        <ToastContainer position="top-center" theme="colored" />
+      </Container>
     </div>
   );
-};
-
-export default Contacts;
+}
