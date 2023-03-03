@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/contacts.operations';
-import { selectContacts } from '../../redux/contacts/contacts.selectors';
+import { addContact } from 'redux/contacts/operations';
+import { selectContacts } from '../../redux/contacts/selectors';
 
 export const ContactsForm = () => {
   const dispatch = useDispatch();
