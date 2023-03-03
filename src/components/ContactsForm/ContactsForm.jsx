@@ -1,78 +1,62 @@
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-import { selectContacts } from 'redux/contacts/selectors';
-import { addContact } from 'redux/contacts/operations';
+import { addContact } from 'redux/contacts/contacts.operations';
+import { selectContacts } from '../../redux/contacts/contacts.selectors';
 
 export const ContactsForm = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
-
-  const handleChange = event => {
-    const { name, value } = event.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'phone':
-        setPhone(value);
-        break;
-      default:
-        break;
-    }
-  };
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (contacts.some(contact => contact.name === name)) {
-      alert('Contact already exists');
+    const form = event.target.elements;
+
+    if (
+      contacts.some(
+        contact =>
+          contact.name.toLowerCase().trim() ===
+          form.name.value.toLowerCase().trim()
+      )
+    ) {
+      toast.warn(`${form.name.value} is already in contacts!`);
+      event.target.reset();
       return;
+    } else {
+      dispatch(
+        addContact({ name: form.name.value, number: form.number.value })
+      );
     }
 
-    const contact = {
-      name: name,
-      phone: phone,
-    };
-
-    dispatch(addContact(contact));
-
-    reset();
+    event.target.reset();
   };
 
-  const reset = () => {
-    setName('');
-    setPhone('');
-  };
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
-        <label>
+        <label htmlFor="name">
           Name
           <input
-            tupe="text"
+            type="text"
             name="name"
-            value={name}
-            onChange={handleChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            placeholder="Only letters, apostrophe, dash and spaces."
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
         </label>
-        <label>
+        <label htmlFor="number">
           Number
           <input
             type="tel"
-            name="phone"
-            value={phone}
-            onChange={handleChange}
+            name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            placeholder="Only digits.Can spaces, dashes, parentheses, start with +."
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button>Add Contact</button>
       </form>
-    </div>
+    </>
   );
 };
