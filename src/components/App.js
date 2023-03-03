@@ -2,12 +2,12 @@ import { useAuth } from 'hooks';
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { refreshUser } from 'redux/auth/auth.operations';
-import { SharedLayout } from '../components/SharedLayout/SharedLayout';
-import { PrivateRoute } from './PrvateRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { Layout } from './Layout/Layout';
+import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 
-const Homepages = lazy(() => import('../pages/Home'));
+const HomePages = lazy(() => import('../pages/Home'));
 const RegisterPages = lazy(() => import('../pages/Register'));
 const LoginPages = lazy(() => import('../pages/Login'));
 const ContactsPages = lazy(() => import('../pages/Contacts'));
@@ -24,8 +24,8 @@ export const App = () => {
     <div>Refreshing user...</div>
   ) : (
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Homepages />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePages />} />
         <Route
           path="/register"
           element={
