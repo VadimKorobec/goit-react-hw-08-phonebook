@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilter } from 'redux/contacts/contacts.selectors';
-import { searchContact } from '../../redux/contacts/filter.slise';
-import { Heading } from 'components/Heading/Hading';
+import { selectFilter } from 'redux/contacts/selectors';
+import { searchContact } from '../../redux/contacts/filter';
 
 export const Filter = () => {
   const filter = useSelector(selectFilter);
@@ -11,7 +10,6 @@ export const Filter = () => {
 
   return (
     <>
-      <Heading title={'Search contacts'} />
       <div>
         <label htmlFor="search">
           Find contact by name
