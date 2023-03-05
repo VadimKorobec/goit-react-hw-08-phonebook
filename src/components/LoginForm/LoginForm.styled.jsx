@@ -30,4 +30,5 @@ export const Button = styled.button`
   color: #ff7f50;
   border-radius: 8px;
   width: 80px;
+  cursor: pointer;
 `;
