@@ -7,7 +7,7 @@ import {
   selectIsLoadingContacts,
 } from 'redux/contacts/selectors';
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
-import { Container, List, Progres, Text, Wrapper } from './ContactList.styled';
+import { List, Progres, Text, Wrapper } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
