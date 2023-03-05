@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const List = styled.form`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 320px;
@@ -11,4 +11,8 @@ export const List = styled.form`
   background-color: #ffefd5;
   padding: 20px;
   margin-top: 50px;
+`;
+
+export const Text = styled.p`
+  align-items: center;
 `;
