@@ -7,6 +7,7 @@ import {
   selectIsLoadingContacts,
 } from 'redux/contacts/selectors';
 import { ContactListItem } from 'components/ContactListItem/ContactListItem';
+import { Container, List, Text } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
@@ -19,17 +20,17 @@ export const ContactList = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Container>
       {isLoadingContacts && !errorContacts && <b>Request in progress...</b>}
       {contacts.length ? (
-        <ul>
+        <List>
           {contacts.map(contact => (
             <ContactListItem key={contact.id} contact={contact} />
           ))}
-        </ul>
+        </List>
       ) : (
-        <p>Start adding contacts!</p>
+        <Text>Start adding contacts!</Text>
       )}
-    </>
+    </Container>
   );
 };
