@@ -1,39 +1,58 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 import { Button, Form, Input, Label, LabelText } from './RegisterForm.styled';
 
 export const RegisterForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();
-    const form = event.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+    reset();
+  };
+
+  const reset = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Label>
         <LabelText> Username</LabelText>
-        <Input type="text" name="name" autoComplete="username" />
+        <Input
+          type="text"
+          name="name"
+          value={name}
+          onChange={event => {
+            setName(event.target.value);
+          }}
+        />
       </Label>
       <Label>
         <LabelText> Email</LabelText>
-        <Input type="email" name="email" />
+        <Input
+          type="email"
+          name="email"
+          value={email}
+          onChange={event => {
+            setEmail(event.target.value);
+          }}
+        />
       </Label>
       <Label>
         <LabelText> Password</LabelText>
         <Input
           type="password"
           name="password"
-          autoComplete="current-password"
+          value={password}
+          onChange={event => {
+            setPassword(event.target.value);
+          }}
         />
       </Label>
       <Button type="submit">Register</Button>
