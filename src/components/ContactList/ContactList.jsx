@@ -4,7 +4,7 @@ import { selectError, selectIsLoading } from 'redux/contacts/selectors';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
-import { Item, List, Progres } from './ContactList.styled';
+import { Item, List, Progres, Text } from './ContactList.styled';
 
 export const ContactsList = () => {
   const contacts = useSelector(selectFilteredContacts);
@@ -20,6 +20,7 @@ export const ContactsList = () => {
     <>
       {isLoading && !error && <Progres>Request in progress...</Progres>}
       <List>
+        <Text>Contacts</Text>
         {contacts.map(contact => (
           <Item key={contact.id}>
             <ContactsListItem contact={contact} />
