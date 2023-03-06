@@ -24,3 +24,9 @@ export const Progres = styled.b`
   text-align: center;
   margin-top: 50px;
 `;
+
+export const Text = styled.p`
+  font-weight: 700;
+  color: #2f4f4f;
+  text-align: center;
+`;
