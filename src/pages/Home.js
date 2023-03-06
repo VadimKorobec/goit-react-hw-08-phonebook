@@ -8,7 +8,7 @@ export default function Home() {
         size="3xl"
         textAlign="center"
         p={20}
-        bg="gray.100"
+        bg="#ffefd5"
         color="#2f4f4f"
         h="100vh"
         noOfLines={[1, 2, 3]}
