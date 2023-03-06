@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet';
 import { Filter } from '../components/Filter/Filter';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,10 +7,9 @@ import { ContactsList } from 'components/ContactList/ContactList';
 export default function Contacts() {
   return (
     <div>
-      <Helmet prioritizeSeoTags>
-        <title>My phonebook</title>
-        <meta property="og:title" content="My phonebook" />
-      </Helmet>
+      <title>My phonebook</title>
+      <meta property="og:title" content="My phonebook" />
+
       <div>
         <ContactsForm />
         <Filter />
