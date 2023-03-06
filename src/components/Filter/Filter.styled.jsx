@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 320px;
   margin: 0 auto;
-  width: 400px;
+  width: 500px;
   gap: 15px;
   border-radius: 8px;
   background-color: #ffefd5;
@@ -17,8 +17,6 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
-  width: 320px;
-  margin: 0 auto;
   text-align: center;
 `;
 
@@ -30,6 +28,8 @@ export const LabelText = styled.span`
 
 export const Input = styled.input`
   display: block;
+  margin: 0 auto;
+  width: 320px;
   height: 25px;
   border-radius: 5px;
 `;
