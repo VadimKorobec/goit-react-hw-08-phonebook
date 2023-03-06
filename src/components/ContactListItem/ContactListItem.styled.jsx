@@ -6,7 +6,7 @@ export const Item = styled.div`
   align-items: center;
 `;
 
-export const ItemText = styled.span`
+export const Text = styled.span`
   font-weight: 700;
   color: #2f4f4f;
   margin-bottom: 5px;
@@ -29,8 +29,4 @@ export const Button = styled.button`
   &:focus {
     background-color: #a9a9a9;
   }
-`;
-
-export const Text = styled.span`
-  margin-right: auto;
 `;
