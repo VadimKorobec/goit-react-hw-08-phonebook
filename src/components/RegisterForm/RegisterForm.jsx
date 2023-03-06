@@ -9,15 +9,16 @@ export const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    reset();
-  };
-
   const reset = () => {
     setName('');
     setEmail('');
     setPassword('');
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    dispatch(register(name, email, password));
+    reset();
   };
 
   return (
