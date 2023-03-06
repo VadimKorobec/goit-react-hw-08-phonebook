@@ -17,14 +17,14 @@ export const RegisterForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register({ name, email, password }));
     reset();
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Label>
-        <LabelText> Username</LabelText>
+        <LabelText> User Name</LabelText>
         <Input
           type="text"
           name="name"
@@ -56,7 +56,9 @@ export const RegisterForm = () => {
           }}
         />
       </Label>
-      <Button type="submit">Register</Button>
+      <Button type="submit" disabled={!name || !email || !password}>
+        Register
+      </Button>
     </Form>
   );
 };
